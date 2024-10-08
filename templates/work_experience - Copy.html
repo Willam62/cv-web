@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Work Experience</h2>
+<form method="POST">
+    <input type="text" name="job_title" placeholder="Job Title" required>
+    <input type="text" name="company" placeholder="Company" required>
+    <input type="text" name="start_date" placeholder="Start Date (YYYY-MM-DD)" required>
+    <input type="text" name="end_date" placeholder="End Date (YYYY-MM-DD)" required>
+    <button type="submit">Add</button>
+</form>
+<ul>
+    {% for work in experiences %}
+    <li>
+        {{ work.job_title }} at {{ work.company }} ({{ work.start_date }} - {{ work.end_date }})
+        <form method="POST" action="{{ url_for('delete_work', id=work.id) }}">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
